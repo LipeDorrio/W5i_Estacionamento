@@ -1,4 +1,7 @@
 <?php
+
+global $conn;
+
 define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "");
