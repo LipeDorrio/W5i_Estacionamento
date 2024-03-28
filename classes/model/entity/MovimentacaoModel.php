@@ -4,13 +4,10 @@ require_once($path_inc."/classes/model/entiy/VeiculoModel.php");
 Class MovimentacaoModel{
 
     private $id;
-    private $idVeiculo;
-
-    private $dt_entrada;
-
-    private $dt_saida;
-
-    private $valor_cobrado;
+    public $idVeiculo;
+    private $dtEntrada;
+    private $dtSaida;
+    private $valorCobrado;
 
     public function __construct(){
         $this->idVeiculo = new VeiculoModel();
@@ -24,26 +21,26 @@ Class MovimentacaoModel{
         $this->id = $id;
     }
 
-    public function getDt_entrada(){
-        return $this->dt_entrada;
+    public function getDtEntrada(){
+        return $this->dtEntrada;
     }
-    public function setDt_entrada($dt_entrada){
-        $this->dt_entrada = $dt_entrada;
+    public function setDtEntrada($dtEntrada){
+        $this->dtEntrada = $dtEntrada;
     }
 
-    public function getDt_saida(){
-        return $this->dt_saida;
+    public function getDtSaida(){
+        return $this->dtSaida;
     }
-    public function setDt_saida($dt_saida){
-        $this->dt_saida = $dt_saida;
+    public function setDtSaida($dtSaida){
+        $this->dtSaida = $dtSaida;
     }
 
     public function getValorCobrado(){
-        return $this->valor_cobrado;
+        return $this->valorCobrado;
     }
 
-    public function setValorCobrado($valor_cobrado){
-        $this->valor_cobrado = $valor_cobrado;
+    public function setValorCobrado($valorCobrado){
+        $this->valorCobrado = $valorCobrado;
     }
 }
 ?>

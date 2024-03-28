@@ -7,11 +7,11 @@ class VeiculoModel
 {
 
     private $id;
-    private $id_categoria;
+    public $idCategoria;
     private $placa;
 
     public function __construct(){
-        $this->id_categoria = new CategoriaModel();
+        $this->idCategoria = new CategoriaModel();
     }
 
     public function getId(){

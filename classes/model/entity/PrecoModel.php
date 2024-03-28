@@ -4,7 +4,6 @@
 Class PrecoModel{
     private $id;
     private $valor;
-
     private $descricao;
 
     public function __construct(){
