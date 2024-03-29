@@ -25,6 +25,8 @@ class VeiculoRepository
                     categoria.descricao as descricao_IdCategoria , 
                     from  veiculo,
                     categoria";
+        if(!$result = $conn->Execute($query))throw new Exception("[REPOSITORY]->". $conn->ErrorMsg());
+        return $result;
     }
 
 }

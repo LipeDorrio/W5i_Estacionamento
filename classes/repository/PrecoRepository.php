@@ -19,6 +19,13 @@ class PrecoRepository{
         if(!$result = $conn->Execute($query))throw new Exception("[REPOSITORY]->".mysqli_error($conn));
         return $result;
     }
+    public function listAllConst($conn, $param,$obj){
+        $query = "  select  preco.id,  preco.valor, preco.descricao as id_idPreco 
+                    from    preco
+                    where preco.id = ".$obj->getId()." ";
+        if($result = $conn->Execute($query))throw new Exception("[REPOSITORY]->".mysqli_error($conn));
+        return $result;
+    }
 
 }
 ?>

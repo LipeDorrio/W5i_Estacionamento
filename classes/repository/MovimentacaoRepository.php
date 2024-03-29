@@ -30,9 +30,17 @@ class MovimentacaoRepository
         return $result;
     }
 
-    public function listAllConst($conn, $param){
-        $query = "select movimentacao.id, movimentacao.id_veiculo, veiculo.id as id_Idveiculo, 
-                  ";
+    public function listAllConst($conn, $param,$obj){
+        $query = "select 	movimentacao.id, movimentacao.id_veiculo , movimentacao.dt_entrada, movimentacao.dt_saida, movimentacao.valor_cobrado, 
+		                    veiculo.id as id_idVeiculo, 
+		                    veiculo.placa as placa_idVeiculo ,
+		                    veiculo.id_categoria, categoria.descricao as descricao_idCategoria
+                    from 	movimentacao, veiculo, categoria 
+                    where 	movimentacao.id_veiculo = veiculo.id 
+                    and 	veiculo.id_categoria = categoria.id
+                    and 	movimentacao.dt_entrada between ".$obj->getDtEntrada()." and ".$obj->getDtSaida()." ";
+        if (!$result = $conn->Execute($query))throw new Exception("[REPOSITORY]->".$conn->ErrorMsg());
+        return $result;
     }
 }
 ?>
