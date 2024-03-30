@@ -9,8 +9,8 @@ class MovimentacaoRepository
                             " . $obj->getDtSaida() . ",
                             " . $obj->getValorCobrado() . " 
                             )";
-        if (!$result = $conn->Execute($query))
-            throw new Exception("[REPOSITORY]->" . $conn->ErrorMsg());
+        if (!$result = $conn->Execute($query))throw new Exception("[REPOSITORY]->" . $conn->ErrorMsg());
+        return $result;
     }
     public function update($conn, $obj){
         $query = "update    movimentacao 
@@ -19,8 +19,7 @@ class MovimentacaoRepository
                             movimentacao.dt_saida = '" . $obj->getDtSaida() . "',
                             movimentacao.valor_cobrado = '" . $obj->getValorCobrado() . "'
                     where   movimentacao.id = " . $obj->getId() . " ";
-        if (!$result = $conn->Execute($query))
-            throw new Exception("[REPOSITORY]->" . $conn->ErrorMsg());
+        if (!$result = $conn->Execute($query))throw new Exception("[REPOSITORY]->" . $conn->ErrorMsg());
         return $result;
     }
     public function delete($conn, $obj){
