@@ -1,48 +1,94 @@
 <?php require_once ("../../configuracao.php"); ?>
 <?php require_once ($path_inc . "/resources/topo.php"); ?>
+
 <div class="container">
     <div>
+
         <div class="align">
-            <label for="formGroupExampleInput2" class="form-label">Filtro</label>
-            <input style="width :110px; height :40px" type="text" class="form-control" id="formGroupExampleInput2"
-                placeholder="Filtro">
+
+            <label for="formGroupExampleInput2" class="form-label">Pesquisa</label>
+            <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
+                placeholder="Descrição">
+
         </div>
+
     </div>
+
     <div class="button">
-        <button type="button" class="btn btn-primary">Primary</button>
+
+        <button type="button" class="btn btn-primary">Pesquisar</button>
+
     </div>
+
 </div>
-<button style="align-itens: right" class="btn btn-primary">Teste</button>
-<div class="table">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
+
+<div class="container">
+
+    <div class="">
+
+        <button style="align-itens: right" class="btn btn-primary">Novo Cadastro</button>
+
+    </div>
+
+
+</div>
+
+<div class="container">
+
+    <div class="table">
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th scope="col">Id</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col"></th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <th scope="row">1</th>
+                    <td>Carro</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">Editar</button>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+
+                    <th scope="row">2</th>
+                    <td>Moto</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">Editar</button>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+
+                </tr>
+                <tr>
                 <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>Caminhão</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">Editar</button>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
 </div>
 
 
@@ -50,34 +96,31 @@
 
 <style>
     .container {
-        width: 100vw;
-        height: 100px;
-        display: flex;
+        padding: 5px;
+        display: column;
         flex-direction: row;
-        justify-content: top;
-        align-items: top;
-        border: solid;
-        border-radius: 20px;
-        border-color: green;
+        align-items: flex-start;
+    }
 
+    .table {
+        width: 100%;
+        display: column;
     }
-    .table{
-       display: column;
-       height: 100px;
-       height: 100px;
-    }
+
     .align {
         margin-top: 20px;
         display: flex;
         flex-direction: row;
-        justify-content: right;
+        justify-content: flex-start;
+        /* Alinha à direita */
         align-items: right;
     }
 
     .button {
         display: flex;
-        flex-direction: column;
-        justify-content: right;
-        align-items: ;
+        flex-direction: row;
+        justify-content: flex-end;
+        /* Alinha à direita */
+        align-items: right;
     }
 </style>
