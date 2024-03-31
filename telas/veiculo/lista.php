@@ -1,25 +1,50 @@
-<?php require_once ("../../configuracao.php"); ?>
-<?php require_once ($path_inc . "/resources/topo.php"); ?>
+<?php
+require_once ("../../configuracao.php");
+require_once ($path_inc . "/resources/topo.php");
+require_once ($path_inc . "/classes/controller/VeiculoController.php");
+
+$acao = (isset($_REQUEST["acao"])) ? $_REQUEST["acao"] : '';
+$paramVeiculo = ["comp" => ""];
+$idCategoria = "";
+$placa = "";
+if ($acao == "veiculoEdita" || $acao == "veiculoCadastro" || $acao == "veiculoExclui") {
+    $idCategoria = new VeiculoController($acao);
+    echo $veiculo->retorno;
+} else {
+    $id = intval(isset($_REQUEST["id"]) ? intval($_REQUEST["id"]) : '');
+    $acao = intval(isset($_REQUEST['acao']) ? intval($_REQUEST['acao']) : '');
+    $idCategoria = intval(isset($_REQUEST['id_categoria']) ? intval($_REQUEST['id_categoria']) : '');
+    $comp = "";
+    $comp .= ($idCategoria != "" ? " and veiculo.id_categoria like '%" . $idCategoria . "%'" : "");
+    $comp .= ($placa != "" ? " and veiculo.placa like '%" . $placa . "%'" : "");
+    $paramVeiculo = ["comp" => $comp];
+}
+$veiculo = new VeiculoController("veiculoListagem", $paramVeiculo);
+
+?>
 
 <div class="container">
-    <div>
+    <form name="veiculoListagem" method="post" action="<?= $caminho ?>">
+        <div>
 
-        <div >
+            <div>
 
-            <label for="formGroupExampleInput2" class="form-label">Categoria</label>
-            <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Categoria">
-            <label for="formGroupExampleInput2" class="form-label">Placa</label>
-            <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Placa">
+                <label for="formGroupExampleInput2" class="form-label">Categoria</label>
+                <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Categoria" name="idCategoria" value="<?= $idCategoria ?>">
+                <label for="formGroupExampleInput2" class="form-label">Placa</label>
+                <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Placa" name="placa" value="<? $placa ?>">
 
+            </div>
+            <div class="button">
+
+                <button type="button" class="btn btn-primary"
+                    onclick="document.veiculo.Listagem.submit()">Pesquisar</button>
+
+            </div>
         </div>
-
-    </div>
-
-    <div class="button">
-
-        <button type="button" class="btn btn-primary">Pesquisar</button>
-
-    </div>
+    </form>
 
 </div>
 
@@ -27,7 +52,8 @@
 
     <div class="button">
 
-        <a href="<?=$caminho?>telas/veiculo/cadastro.php"><button class="btn btn-primary">Novo Cadastro</button></a>
+        <a href="<?= $caminho ?>telas/veiculo/cadastro.php?acao=veiculoCadastro"><button class="btn btn-primary">Novo
+                Cadastro</button></a>
 
     </div>
 
@@ -52,40 +78,26 @@
             </thead>
 
             <tbody>
-
-                <tr>
-
-                    <th scope="row">1</th>
-                    <td>Carro</td>
-                    <td>ABL7F25</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
-                        <button class="btn btn-sm btn-danger">Excluir</button>
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th scope="row">2</th>
-                    <td>Moto</td>
-                    <td>ATG7J64</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
-                        <button class="btn btn-sm btn-danger">Excluir</button>
-                    </td>
-
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                    <td>Caminhão</td>
-                    <td>BCD7A67</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
-                        <button class="btn btn-sm btn-danger">Excluir</button>
-                    </td>
-                </tr>
-
+                <? for ($x = 0; $x < count($veiculo->retorno); $x++) { ?>
+                    <tr>
+                        <th scope="row">
+                            <? echo $veiculo->retorno[$x]->getId(); ?>
+                        </th>
+                        <td>
+                            <? echo $veiculo->retorno[$x]->getIdCategoria(); ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">
+                                <a
+                                    href="<?= $caminho ?>telas/veiculo/cadastro.php?acao=veiculoEdita&id=<? echo $veiculo->retorno[$x]->getId(); ?>">Editar</a>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <a
+                                    href="<?= $caminho ?>telas/veiculo/lista.php?acao=veiculoExclui&id=<? echo $veiculo->retorno[$x]->getId(); ?>">Excluir</a>
+                            </button>
+                        </td>
+                    </tr>
+                <? } ?>
             </tbody>
 
         </table>

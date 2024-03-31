@@ -21,10 +21,12 @@ if ($id > 0 && $acao=="categoriaEdita"){
             <input type="hidden" name="id" value="<?=$id?>">
             <div class="col-md-6 offset-md-3">
                 <h1 class="text-center mb-5">Cadastro</h1>
+                
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Descrição" aria-label="Descrição"
                         aria-describedby="button-addon2" name="descricao" value="<?=$descricao?>">
                 </div>
+                
                 <div class="text-center mb-3">
                     <button  class="btn btn-primary" type="button" id="button-addon2" onclick="Valida_form();">Salvar</button>
                 </div>
@@ -38,13 +40,13 @@ if ($id > 0 && $acao=="categoriaEdita"){
     </div>
 </div>
 <script language="JavaScript">
-function Valida_form(){
-    var f = document.categoriaListagem;
-    if (f.descricao.value == ""){
-        alert('Descrição não pode ser vazio');
-    } else {
-        f.submit();
-    }
+    function Valida_form(){
+        var f = document.categoriaListagem;
+        if (f.descricao.value == ""){
+            alert('Descrição não pode ser vazio');
+        } else {
+            f.submit();
+        }
 }
 </script>
 <?php require_once ($path_inc . "/resources/rodape.php"); ?>
