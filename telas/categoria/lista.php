@@ -4,7 +4,7 @@
 <div class="container">
     <div>
 
-        <div class="align">
+        <div>
 
             <label for="formGroupExampleInput2" class="form-label">Pesquisa</label>
             <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
@@ -24,12 +24,11 @@
 
 <div class="container">
 
-    <div class="">
+    <div class="button">
 
-        <button style="align-itens: right" class="btn btn-primary">Novo Cadastro</button>
+        <a href="<?= $caminho ?>telas/categoria/cadastro.php"><button class="btn btn-primary">Novo Cadastro</button></a>
 
     </div>
-
 
 </div>
 
@@ -61,7 +60,6 @@
                         <button class="btn btn-sm btn-danger">Excluir</button>
                     </td>
 
-
                 </tr>
 
                 <tr>
@@ -75,7 +73,7 @@
 
                 </tr>
                 <tr>
-                <th scope="row">3</th>
+                    <th scope="row">3</th>
                     <td>Caminhão</td>
                     <td>
                         <button class="btn btn-sm btn-primary">Editar</button>
@@ -90,7 +88,6 @@
     </div>
 
 </div>
-
 
 <?php require_once ($path_inc . "/resources/rodape.php"); ?>
 
@@ -107,20 +104,10 @@
         display: column;
     }
 
-    .align {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        /* Alinha à direita */
-        align-items: right;
-    }
-
     .button {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        /* Alinha à direita */
         align-items: right;
     }
 </style>

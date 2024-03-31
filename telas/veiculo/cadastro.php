@@ -1,43 +1,35 @@
-<!doctype html>
-<html lang="pt-BR">
+<?php require_once ("../../configuracao.php");?>
+<?php require_once($path_inc."/resources/topo.php"); ?>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro categoria</title>
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">W5i</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cadastro.php">Cadastro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cadastroCategoria.php">Cadastro Categoria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="relatorio.php">Relatório</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pesquisa.php">Pesquisa</a>
-                        </li>
-                    </ul>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center mb-5">Cadastro</h1>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Categoria" aria-label="Categoria" aria-describedby="button-addon2">
             </div>
-        </nav>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Placa" aria-label="Placa" aria-describedby="button-addon2">            
+            </div>
+            <div class="text-center mb-3">
+                <a href="<?=$caminho ?>telas/veiculo/lista.php"><button class="btn btn-primary" type="button" id="button-addon2">Cadastrar</button></a>
+            </div>
+            <div class="text-center">
+                <a href="<?=$caminho ?>telas/veiculo/lista.php"><button class="btn btn-secondary">Cancelar</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="../resources/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require_once($path_inc."/resources/rodape.php"); ?>
+
+<style>
+
+.container {
+    margin-top: 60px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+</style>
