@@ -1,13 +1,13 @@
 <?php
 
 Class CategoriaModel{
-    private $id;
 
+    private $id;
     private $descricao;
 
     public function __construct(){
     }
-    public function getId($id){
+    public function getId(){
         return $this->id;
     }
     public function setId($id){
