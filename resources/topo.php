@@ -32,9 +32,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$caminho ?>telas/veiculo/lista.php">Veículo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$caminho ?>telas/preco/lista.php">Tabela de Preço</a>
-                </li>
             </ul>
         </div>
     </div>

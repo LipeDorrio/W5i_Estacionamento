@@ -2,7 +2,6 @@
 date_default_timezone_set('America/Bahia');
 global $config;
 
-// phpinfo();
 
 $config["servidor"]		= "localhost";
 $config["bd"]			= "bd_estacionamento";
@@ -10,7 +9,7 @@ $config["usuario"]		= "root";
 $config["senha"]		= "";
 $config["banco"]		= "mysql";
 
-$debug = true;
+$debug = false;
 if ($debug){
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
