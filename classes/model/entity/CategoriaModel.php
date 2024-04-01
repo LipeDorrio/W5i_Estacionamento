@@ -4,6 +4,7 @@ Class CategoriaModel{
 
     private $id;
     private $descricao;
+    private $taxaPorHora;
 
     public function __construct(){
     }
@@ -18,6 +19,13 @@ Class CategoriaModel{
     }
     public function setDescricao($descricao){
         $this->descricao = $descricao;
+    }
+
+    public function getTaxaPorHora(){
+        return $this->taxaPorHora;
+    }
+    public function setTaxaPorHora($taxaPorHora){
+        $this->taxaPorHora = $taxaPorHora;
     }
 
 }

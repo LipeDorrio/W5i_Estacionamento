@@ -1,6 +1,4 @@
 <?php
-
-
 require_once($path_inc."/classes/model/entity/CategoriaModel.php");
 
 class VeiculoModel

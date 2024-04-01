@@ -1,6 +1,6 @@
 <?php
 
-require_once($path_inc."/classes/model/entiy/VeiculoModel.php");
+require_once($path_inc."/classes/model/entity/VeiculoModel.php");
 Class MovimentacaoModel{
 
     private $id;
@@ -8,6 +8,7 @@ Class MovimentacaoModel{
     private $dtEntrada;
     private $dtSaida;
     private $valorCobrado;
+    private $qtdHoras;
 
     public function __construct(){
         $this->idVeiculo = new VeiculoModel();
@@ -41,6 +42,12 @@ Class MovimentacaoModel{
 
     public function setValorCobrado($valorCobrado){
         $this->valorCobrado = $valorCobrado;
+    }
+    public function getQtdHoras(){
+        return $this->qtdHoras;
+    }
+    public function setQtdHoras($qtdHoras){
+        $this->qtdHoras = $qtdHoras;
     }
 }
 ?>
