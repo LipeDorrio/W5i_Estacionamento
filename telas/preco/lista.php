@@ -1,43 +1,114 @@
-<!doctype html>
-<html lang="pt-BR">
+<?php
+require_once ("../../configuracao.php");
+require_once ($path_inc . "/resources/topo.php");
+require_once ($path_inc . "/classes/controller/PrecoController.php");
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro categoria</title>
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-</head>
+$acao = (isset($_REQUEST['acao']) ? $_REQUEST['acao'] : '');
+$paramPreco = ["comp" => ""];
+$qtdHora = "";
+$descricao = "";
+$valor = "";
+if ($acao == "precoEdita" || $acao == "precoCadastro" || $acao == "precoExclui") {
+    $preco = new PrecoController($acao);
+    echo $preco->retorno;
+} else {
+    $id = intval(isset($_REQUEST['id']) ? $_REQUEST['id'] : '');
+    $qtdHora = (isset($_REQUEST['qtdHora']) ? $_REQUEST['qtdHora'] : '');
+    $descricao = (isset($_REQUEST['descricao']) ? $_REQUEST['descricao'] : '');
+    $valor = (isset($_REQUEST['valor']) ? $_REQUEST['valor'] : '');
+    $comp = "";
+    $comp .= ($qtdHora != "" ? " and preco.qtd_hora = " . $qtdHora . "" : "");
+    $comp .= ($descricao != "" ? " and preco.descricao like '%" . $descricao . "%'" : "");
+    $comp .= ($valor != "" ? " and preco.valor = " . $valor . " " : " ");
+    $paramPreco = ["comp" => $comp];
+}
+$preco = new PrecoController("precoListagem", $paramPreco);
+?>
 
-<body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">W5i</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cadastro.php">Cadastro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cadastroCategoria.php">Cadastro Categoria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="relatorio.php">Relatório</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pesquisa.php">Pesquisa</a>
-                        </li>
-                    </ul>
-                </div>
+<div class="container">
+    <form name="precoListagem" method="post" action="<?= $caminho ?>telas/preco/lista.php">
+        <div>
+
+            <div>
+                <label for="formGroupExampleInput2" class="form-label">QtdHora</label>
+                <input style="width:160px" type="text" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Quantidade Hora" name="qtdHora" value="<?= $qtdHora ?>">
             </div>
-        </nav>
+            <div>
+                <label for="formGroupExampleInput2" class="form-label">Descrição</label>
+                <input style="width:160px" type="text" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Descrição" name="descricao" value="<?= $descricao ?>">
+            </div>
+        </div>
+        <div class="button">
+            <button type="button" class="btn btn-primary" onclick="document.precoListagem.submit()">Pesquisar</button>
+        </div>
+    </form>
+</div>
 
-    <script src="../resources/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<div class="container">
+
+    <div class="button">
+
+        <a href="<?= $caminho ?>telas/preco/cadastro.php?acao=precoCadastro"><button class="btn btn-primary">Novo
+                Cadastro</button></a>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="table">
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th scope="col">Id</th>
+                    <th scope="col">QtdHora</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">valor</th>
+                    <th scope="col"></th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <? for ($x = 0; $x < count($preco->retorno); $x++) { ?>
+                    <tr>
+                        <th scope="row">
+                            <? echo $preco->retorno[$x]->getId(); ?>
+                        </th>
+                        <td>
+                            <? echo $preco->retorno[$x]->getQtdHora(); ?>
+                        </td>
+                        <td>
+                            <? echo $preco->retorno[$x]->getDescricao(); ?>
+                        </td>
+                        <td>
+                            <? echo $preco->retorno[$x]->getValor(); ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">
+                                <a
+                                    href="<?= $caminho ?>telas/preco/cadastro.php?acao=precoEdita&id=<? echo $preco->retorno[$x]->getId(); ?>">Editar</a>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <a
+                                    href="<?= $caminho ?>telas/preco/lista.php?acao=precoExclui&id=<? echo $preco->retorno[$x]->getId(); ?>">Excluir</a>
+                            </button>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<?php require_once ($path_inc . "/resources/rodape.php"); ?>

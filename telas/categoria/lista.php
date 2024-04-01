@@ -12,7 +12,6 @@ if ($acao == "categoriaEdita" || $acao == "categoriaCadastro" || $acao == "categ
     echo $categoria->retorno;
 } else {
     $id = intval(isset($_REQUEST['id']) ? $_REQUEST['id'] : '');
-    $acao = intval(isset($_REQUEST['acao']) ? $_REQUEST['acao'] : '');
     $descricao = (isset($_REQUEST['descricao']) ? $_REQUEST['descricao'] : '');
     //Montar filtro 
     $comp = "";
@@ -62,6 +61,7 @@ $categoria = new CategoriaController("categoriaListagem", $paramCategoria);
 
                     <th scope="col">Id</th>
                     <th scope="col">Descrição</th>
+                    <th scope="col">Taxa por hora</th>
                     <th scope="col"></th>
 
                 </tr>
@@ -75,6 +75,9 @@ $categoria = new CategoriaController("categoriaListagem", $paramCategoria);
                         </th>
                         <td>
                             <? echo $categoria->retorno[$x]->getDescricao(); ?>
+                        </td>
+                        <td>
+                            <? echo $categoria->retorno[$x]->getTaxaPorHora(); ?>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary">
@@ -98,28 +101,3 @@ $categoria = new CategoriaController("categoriaListagem", $paramCategoria);
 
 <?php require_once ($path_inc . "/resources/rodape.php"); ?>
 
-<style>
-    .container {
-        padding: 5px;
-        display: column;
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .table {
-        width: 100%;
-        display: column;
-    }
-
-    .button {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: right;
-    }
-
-    a {
-        text-decoration: none;
-        color: white;
-    }
-</style>

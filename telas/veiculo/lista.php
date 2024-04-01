@@ -2,45 +2,49 @@
 require_once ("../../configuracao.php");
 require_once ($path_inc . "/resources/topo.php");
 require_once ($path_inc . "/classes/controller/VeiculoController.php");
+require_once ($path_inc . "/classes/controller/CategoriaController.php"); 
 
 $acao = (isset($_REQUEST["acao"])) ? $_REQUEST["acao"] : '';
 $paramVeiculo = ["comp" => ""];
 $idCategoria = "";
 $placa = "";
 if ($acao == "veiculoEdita" || $acao == "veiculoCadastro" || $acao == "veiculoExclui") {
-    $idCategoria = new VeiculoController($acao);
+    $veiculo = new VeiculoController($acao);
     echo $veiculo->retorno;
 } else {
-    $id = intval(isset($_REQUEST["id"]) ? intval($_REQUEST["id"]) : '');
-    $acao = intval(isset($_REQUEST['acao']) ? intval($_REQUEST['acao']) : '');
-    $idCategoria = intval(isset($_REQUEST['id_categoria']) ? intval($_REQUEST['id_categoria']) : '');
+    $idCategoria = (isset($_REQUEST['idCategoria']) ? $_REQUEST['idCategoria'] : '');
+    $placa = (isset($_REQUEST['placa']) ? $_REQUEST['placa'] : '');
     $comp = "";
-    $comp .= ($idCategoria != "" ? " and veiculo.id_categoria like '%" . $idCategoria . "%'" : "");
+    $comp .= ($idCategoria != "" ? " and veiculo.id_categoria = '" . $idCategoria . "'" : "");
     $comp .= ($placa != "" ? " and veiculo.placa like '%" . $placa . "%'" : "");
     $paramVeiculo = ["comp" => $comp];
 }
 $veiculo = new VeiculoController("veiculoListagem", $paramVeiculo);
-
 ?>
 
 <div class="container">
-    <form name="veiculoListagem" method="post" action="<?= $caminho ?>">
+    <form name="veiculoListagem"  method="post" action="<?= $caminho ?>telas/veiculo/lista.php">
         <div>
 
             <div>
-
+                <? $categoria = new CategoriaController("categoriaListagem", null); ?>
                 <label for="formGroupExampleInput2" class="form-label">Categoria</label>
-                <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
-                    placeholder="Categoria" name="idCategoria" value="<?= $idCategoria ?>">
+                <select name="idCategoria" class="form-select" style="width:20%">
+                    <option value="">Selecione</option> 
+                    <? for ($x = 0; $x < count($categoria->retorno); $x++) { ?>
+                        <option value="<? echo $categoria->retorno[$x]->getId(); ?>"><? echo $categoria->retorno[$x]->getDescricao(); ?></option> 
+                    <? } ?>
+                </select>
+                <script>document.veiculoListagem.idCategoria.value = '<?=$idCategoria?>'</script>
                 <label for="formGroupExampleInput2" class="form-label">Placa</label>
                 <input style="width:100px" type="text" class="form-control" id="formGroupExampleInput2"
-                    placeholder="Placa" name="placa" value="<? $placa ?>">
+                    placeholder="Placa" name="placa" value="<?=$placa?>">
 
             </div>
             <div class="button">
 
                 <button type="button" class="btn btn-primary"
-                    onclick="document.veiculo.Listagem.submit()">Pesquisar</button>
+                    onclick="document.veiculoListagem.submit()">Pesquisar</button>
 
             </div>
         </div>
@@ -76,7 +80,6 @@ $veiculo = new VeiculoController("veiculoListagem", $paramVeiculo);
 
                 </tr>
             </thead>
-
             <tbody>
                 <? for ($x = 0; $x < count($veiculo->retorno); $x++) { ?>
                     <tr>
@@ -84,7 +87,10 @@ $veiculo = new VeiculoController("veiculoListagem", $paramVeiculo);
                             <? echo $veiculo->retorno[$x]->getId(); ?>
                         </th>
                         <td>
-                            <? echo $veiculo->retorno[$x]->getIdCategoria(); ?>
+                            <? echo $veiculo->retorno[$x]->idCategoria->getDescricao(); ?>
+                        </td>
+                        <td>
+                            <? echo $veiculo->retorno[$x]->getPlaca(); ?>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary">
@@ -107,19 +113,3 @@ $veiculo = new VeiculoController("veiculoListagem", $paramVeiculo);
 </div>
 
 <?php require_once ($path_inc . "/resources/rodape.php"); ?>
-
-<style>
-    .container {
-        padding: 5px;
-        display: column;
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .button {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: right;
-    }
-</style>
