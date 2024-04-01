@@ -25,7 +25,7 @@ Class CategoriaController {
 			$categoriaService = new CategoriaService();
 			$categoriaModel = new CategoriaModel();
 			$categoriaModel->setDescricao((isset($_REQUEST["descricao"]) ? $_REQUEST["descricao"] : "" ));
-			
+			$categoriaModel->setTaxaPorHora(floatval(isset($_REQUEST["taxaPorHora"]) ? $_REQUEST["taxaPorHora"] : "" ));
 			$this->retorno = $categoriaService->categoriaCadastro($categoriaModel);
 			if ($this->retorno == ""){
 				echo $this->action->mensagem("Cadastro efetuado com sucesso!", '', '');
@@ -37,6 +37,7 @@ Class CategoriaController {
 			$categoriaModel = new CategoriaModel();
 			$categoriaModel->setId(intval( isset($_REQUEST["id"]) ? $_REQUEST["id"] : "" ));
 			$categoriaModel->setDescricao((isset($_REQUEST["descricao"]) ? $_REQUEST["descricao"] : "" ));
+			$categoriaModel->setTaxaPorHora(floatval(isset($_REQUEST["taxaPorHora"]) ? $_REQUEST["taxaPorHora"] : "" ));
 			$this->retorno = $categoriaService->categoriaEdita($categoriaModel);
 			if ($this->retorno == ""){
 				echo $this->action->mensagem("Edição efetuada com sucesso!", '', '');
@@ -47,7 +48,6 @@ Class CategoriaController {
 			$categoriaService = new CategoriaService();
 			$categoriaModel = new CategoriaModel();
 			$categoriaModel->setId(intval( isset($_REQUEST["id"]) ? $_REQUEST["id"] : "" ));
-			
 			$this->retorno = $categoriaService->categoriaExclui($categoriaModel);
 			if ($this->retorno == ""){
 				echo $this->action->mensagem("Exclusão efetuada com sucesso!", 'exclui', '');
