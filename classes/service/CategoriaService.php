@@ -11,13 +11,15 @@ Class CategoriaService {
 		global $config;
 		$collCategoria = array();
 		try{
-			$Connect = new Connect(); $conn = $Connect->Open();
+			$Connect = new Connect(); 
+			$conn = $Connect->Open();
 			$categoriaRepository = new CategoriaRepository();
 			$rs = $categoriaRepository->listAllConst($conn,$param);
 			while (!$rs->EOF) {
 				$categoriaModel = new CategoriaModel();
 				$categoriaModel->setId(intval($rs->fields["id"]));
 				$categoriaModel->setDescricao(stripslashes($rs->fields["descricao"]));
+				$categoriaModel->setTaxaPorHora(floatval($rs->fields["taxa_por_hora"]));
 				$collCategoria[] = $categoriaModel;
 				$rs->MoveNext();
 			}
@@ -51,6 +53,9 @@ Class CategoriaService {
 		$msg = "";
 		if ($categoriaModel->getDescricao()=="") {
 			$msg .= "O campo descricao precisa ser informado!\\n";
+		}
+		if ($categoriaModel->getTaxaPorHora() <= 0) {
+			$msg .= "A Taxa precisa ser informado!\\n";
 		}
 		return $msg;
 	}
