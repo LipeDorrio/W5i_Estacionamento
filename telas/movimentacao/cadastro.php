@@ -26,7 +26,9 @@ $idVeiculo = "";
                     </select>
                     <script>document.movimentacaoListagem.idVeiculo.value = '<?=$idVeiculo?>'</script>
                 </div>
-                <div class="text-center mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Data entrada</label>
+                <input style="width:160px" type="date" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Data entrada" name="dtEntrada" value="<?= $dtEntrada ?>">
                     <button class="btn btn-primary" type="button" id="button-addon2"
                         onclick="Valida_form();">Salvar</button>
                 </div>
@@ -44,6 +46,8 @@ $idVeiculo = "";
         var f =document.movimentacaoListagem;
         if(f.idVeiculo.value == ""){
             alert('Precisa selecionar algum veículo');
+        }else if(f.dtEntrada.value == ""){
+            alert("Precisa colocar a data de entrada");
         }else {
             f.submit();
         }

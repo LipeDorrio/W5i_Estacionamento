@@ -26,7 +26,7 @@ class MovimentacaoController
             $movimentacaoService = new MovimentacaoService();
             $movimentacaoModel = new MovimentacaoModel();
             $movimentacaoModel->idVeiculo->setId((isset($_REQUEST["idVeiculo"]) ? $_REQUEST["idVeiculo"] : ""));
-            $movimentacaoModel->setDtEntrada(date("Y-m-d H:i:s"));
+            $movimentacaoModel->setDtEntrada((isset($_REQUEST[date("Y-m-d H:i:s")]) ? $_REQUEST[date("Y-m-d H:i:s")] :""));
 
             $this->retorno = $movimentacaoService->movimentacaoEntrada($movimentacaoModel);
             if ($this->retorno == "") {

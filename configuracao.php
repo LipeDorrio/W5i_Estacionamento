@@ -9,7 +9,7 @@ $config["usuario"]		= "root";
 $config["senha"]		= "";
 $config["banco"]		= "mysql";
 
-$debug = false;
+$debug = true;
 if ($debug){
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);

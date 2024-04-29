@@ -3,6 +3,7 @@ require_once ("../../configuracao.php");
 require_once ($path_inc . "/resources/topo.php");
 require_once ($path_inc . "/classes/controller/MovimentacaoController.php");
 require_once ($path_inc . "/classes/controller/VeiculoController.php");
+require_once ($path_inc . "/classes/controller/CategoriaController.php");
 
 $acao = (isset($_REQUEST["acao"])) ? $_REQUEST["acao"] : '';
 $paramMovimentacao = ["comp" => ""];
@@ -36,12 +37,13 @@ $movimentacao = new MovimentacaoController("movimentacaoListagem", $paramMovimen
 
             <div>
                 <? $veiculo = new VeiculoController("veiculoListagem", null); ?>
-                <label for="formGroupExampleInput2" class="form-label">Veiculo</label>
-                <select name="idVeiculo" class="form-select" style="width:20%">
+                <? $categoria = new CategoriaController("categoriaListagem", null); ?>
+                <label for="formGroupExampleInput2" class="form-label">Categoria</label>
+                <select name="descricao" class="form-select" style="width:20%">
                     <option value="">Selecione</option>
-                    <? for ($x = 0; $x < count($veiculo->retorno); $x++) { ?>
-                        <option value="<? echo $veiculo->retorno[$x]->getId(); ?>">
-                            <? echo $veiculo->retorno[$x]->getPlaca(); ?>
+                    <? for ($x = 0; $x < count($categoria->retorno); $x++) { ?>
+                        <option value="<? echo $categoria->retorno[$x]->getId(); ?>">
+                            <? echo $categoria->retorno[$x]->getDescricao(); ?>
                         </option>
                     <? } ?>
                 </select>
